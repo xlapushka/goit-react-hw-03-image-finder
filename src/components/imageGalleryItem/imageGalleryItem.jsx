@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import css from '../styles.module.css';
 
-export function ImageGalleryItem({smallSize,keyWord}) {
+export function ImageGalleryItem({smallSize, bigSize, keyWord, onClick}) {
   return (
     <li className={css.card}>
         <img src={smallSize} alt={keyWord}/>
@@ -10,5 +10,8 @@ export function ImageGalleryItem({smallSize,keyWord}) {
 }
 
 ImageGalleryItem.propTypes = {
-  photos: PropTypes.object
+  smallSize: PropTypes.string,
+  // bigSize: PropTypes.string
+  keyWord : PropTypes.string, 
+  onClick : PropTypes.func,
 }
