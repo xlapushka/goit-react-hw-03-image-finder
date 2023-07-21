@@ -1,6 +1,6 @@
 import css from '../styles.module.css';
 
-export const Foooter = () => {
+export function Foooter() {
   return (
     
     <footer>

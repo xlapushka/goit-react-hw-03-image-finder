@@ -72,7 +72,7 @@ header {
   align-items: center;
   justify-content: center;
 
-  height: 80px;
+  height: 60px;
   width: 100%;
   background-color: #155aaf;
 
@@ -105,6 +105,7 @@ header {
     border: 0.5px solid lightgray;
     border-radius: 6px;
     font-size: 16px;
+    /* font-weight: bold; */
     
     cursor: pointer;
   
@@ -119,87 +120,56 @@ header {
 /* ================section================================== */
 
 section {
-  padding-top: 100px;
-  padding-bottom: 60px;
+  margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 76px;
+  padding-bottom: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.js-list {
+.cardsList {
+  padding: auto;
+  margin: 0;
+  list-style-type: none;
+  
   display: flex;
   flex-wrap: wrap;
-  flex-start: start;
-  gap: 16px
+  justify-content: flex-start;
+  gap: 16px;
+  max-width: calc(100vw - 48px)
 }
 
 .card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 24%;
-  height: 352px;
+  width: 23%;
+  height: auto;
   background-color: #f7faff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   border: 0.5px solid lightgray;
-  border-radius: 6px;
 }
 
-.card-thumb img {
-  border-radius: 6px 6px 0 0;
-}
-
-.card-descr {
-  overflow-y: hidden;
-}
-
-.img-info {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-
-  padding: 8px 12px;
-}
-
-.img-info li {
-  display: flex;
-  flex-direction: column;
-}
-
-.img-info li p {
-  font-weight: bold;
-  text-align: center;
-  font-size: 12px;
-  padding-bottom: 4px;
-}
-
-.img-info li span {
-  font-weight: 400;
-  text-align: center;
-  font-size: 12px;
-}
-
-.js-load {
+.btnLoadMore {
     margin: 20px auto;
     
-    padding: 6px 12px;
-    background-color: #f7faff;
+    padding: 8px 24px;
+    font-size: 16px;
+    color: #f7faff;
+    /* font-weight: bold; */
+    background-color: #155aaf;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-    border: 0.5px solid #f7faff;
+    border: 0.5px solid #155aaf;
     border-radius: 6px;
     
     cursor: pointer;
   
     transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
-                background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-                color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-                border 250ms cubic-bezier(0.4, 0, 0.2, 1),
   }
   
-  .js-load:is(:hover, :focus) {
-    background-color: #155aaf;
-    color: #f7faff;
-    border: 0.5px solid #155aaf;
+  .btnLoadMore:is(:hover, :focus) {
     box-shadow: 2px 8px 8px rgba(0, 0, 0, 0.35);
 }
-
 
  /* =====================footer==================== */
 
@@ -207,20 +177,20 @@ footer {
   position: fixed;
   left: 0;
   bottom: 0;
-  padding: 4px;
+  padding: 2px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  height: 40px;
+  height: 24px;
   width: 100%;
   background-color: #155aaf;
 
   font-family: inherit;
   line-height: 1.5;
   color: #f7faff;
-  font-weight: bold;
+  font-size: 14px;
 
   box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
 }
