@@ -33,7 +33,7 @@ export  class ImageGalleryItem extends Component {
       </li>  
       {this.state.showModal && <Modal 
           onClose = {this.closeModal}
-          children = {<img src={this.state.bigSize} alt={this.state.keyWord}/>}
+          children = {<img src={this.state.bigSize} alt={this.state.keyWord} />}
       />}
     </>
 

@@ -15,8 +15,9 @@ export async function getImages(page=1, keyWord) {
       });
     
     const resp = await axios.get(`${BASE_URL}?key=${API_KEY}&q=${keyWord}&${params}&page=${page}&per_page=${per_page}`);
-    
-    return resp.data.hits
+    const photos = resp.data.hits;
+    const total = resp.data.total;
+    return ({photos, total})
   } catch (err) {
     Notiflix.Notify.failure("Something went wrong! Please try to reload.")
     console.log(err)
