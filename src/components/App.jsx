@@ -6,7 +6,7 @@ import { getImages } from './api/api';
 import { ImageGallery } from './imageGallery/imageGallery';
 import { Button } from './button/button';
 import { Loader } from './loader/loader';
-import { Modal } from './modal/modal';
+// import { Modal } from './modal/modal';
 import css from './styles.module.css'
 
 export class App extends Component {
@@ -14,26 +14,11 @@ state = {
   page : 1,
   keyWord : '',
   photos: [],
-  showModal: false
 };
-
-  openModal = (e) => {
-    console.log("open", e.target)
-      this.setState(() => ({
-        showModal: true,
-      }));
-    }
-
-  closeModal = () => {
-    console.log("close")
-      this.setState(() => ({
-        showModal: false
-      }));
-    }
 
   onSubmit = (e) => {
     e.preventDefault();
-    console.log("onSubmit", this.state);
+    // console.log("onSubmit", this.state);
 
     if (e.target[0].value.trim() === '') {
       this.setState ({
@@ -91,18 +76,14 @@ state = {
             <ImageGallery 
               photos = {this.state.photos}
               keyWord = {this.state.keyWord}
-              openModal={this.openModal}
             /> 
             {((this.state.photos.length % 12) === 0) && 
               <Button onClick = {this.onClick}/>}
               <Loader/>
           </section>
         )}  
-        
-        <Foooter/>
 
-        {this.state.showModal &&
-            <Modal onClose = {this.closeModal}/>}
+        <Foooter/>
       </>  
       
     )

@@ -7,41 +7,37 @@ const modalRoot = document.querySelector('#modal-root');
 
 export class Modal extends Component {
 
-  componentDidMount() {
-    console.log('mount')
-    window.addEventListener('keydown', e => {
-      if (e.code === 'Escape') {
-        this.props.onClose();
-      }
-    })
 
-  //   window.addEventListener('click', e => {
-  //     console.log(e.target.className === 'div.styles_modal__+XqP6');
-  //     // if (e.target.class !== 'modalContent') {
-  //     //   // console.log(e.code);
-  //     //   this.props.onClose();
-  //     // }
-  // })
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleEscape)
   }
 
   componentWillUnmount() {
-    console.log('unmount')
-    window.removeEventListener('keydown', e => {
-      if (e.code === 'Escape') {
-        this.props.onClose();
-      }
-    })
+    window.removeEventListener('keydown', this.handleEscape)
   }
 
-  render() { return (
-    createPortal(    
-      <div className={css.modal}>
-        <div className={css.modalContent}></div>
+ handleEscape = (e) => {
+    if (e.code === 'Escape') {
+      this.props.onClose();
+    }
+  }
+
+  handleClick = (e) => {
+    if (e.target === e.currentTarget) {
+      this.props.onClose();
+    }
+  }
+
+  render() { 
+    return createPortal(    
+      <div className={css.modal} onClick={this.handleClick}>
+        <div className={css.modalContent}>{this.props.children}</div>
       </div>,
       modalRoot,
-    ))}
+      )}
 } 
 
 Modal.propTypes = {
-  onClose: PropTypes.func,
+  onClose: PropTypes.func.isRequired,
+  children: PropTypes.element
 };
