@@ -1,12 +1,34 @@
+import { Component } from 'react';
 import PropTypes from 'prop-types';
+// import Notiflix from 'notiflix';
+
+// import { getImages } from '../api/api';
+
 import css from '../styles.module.css';
 
+export class Searchbar extends Component { 
 
-export function Searchbar({onSubmit}) { 
+    onSubmit = (e) => {
+    e.preventDefault();      
 
-  return (  
+    // if (e.target[0].value.trim() === '') {
+    //   Notiflix.Notify.warning('Please enter something to search!');
+    //   return
+    // } 
+    // else {
+      // getImages(1, e.target[0].value).then(({photos}) => {
+      //   if (photos[0]) {
+          // console.log('word', this.state);
+          this.props.changeState(e.target[0].value.trim());
+        // } else { Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.')};
+      // })
+    // }
+  }
+
+  render() {
+    return (  
       <header className={css.header}>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={this.onSubmit}>
           <input
             className={css.input}
             type="text"
@@ -23,9 +45,10 @@ export function Searchbar({onSubmit}) {
           </button>
         </form>
       </header>
-    )  
+    )
+  }  
 }
 
 Searchbar.propTypes = {
-  onSubmit: PropTypes.func,
+  changeState: PropTypes.func,
 };

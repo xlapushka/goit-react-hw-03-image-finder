@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Notiflix from 'notiflix';
+// import Notiflix from 'notiflix';
 
 import { Searchbar } from './searchbar/searchbar';
 import { Foooter } from './footer/footer';
@@ -21,57 +21,36 @@ state = {
   loading: false,
 };
 
-  onSubmit = (e) => {
-    e.preventDefault();
+componentDidUpdate(prevProps, prevState) {
     this.setState({
-      page : 1,
-      keyWord : '',
-      photos: [],
-      total: 0,
       loading : true
-    })
+    });
 
-    if (e.target[0].value.trim() === '') {
-      Notiflix.Notify.warning('Please enter something to search!');
-      return
-    } else {
-      getImages(1, e.target[0].value).then(({photos,total}) => {
-        if (photos[0]) {
-          this.setState ({
-          page : 2,  
-          keyWord: e.target[0].value,
-          photos : photos,
-          total : total
-          })
-        } else { Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.')};
-      }).finally(() => 
+      getImages(this.state.page, this.state.keyWord).then(({photos,total}) => {
+          this.setState (prevState => ({
+          // page : prevState.page + 1,  
+          photos : prevState.photos.concat(photos),
+          total : total,
+          }))
+        }).finally(() => 
           this.setState({
           loading : false
         }))
     }
-  }
-  
+      
+
+changeState = (keyWord) => {
+    this.setState({
+      keyWord : keyWord
+    })
+} 
 
   onClick = (e) => {
     e.preventDefault();
-    this.setState({
-      loading : true
-    })
 
-    getImages(this.state.page, this.state.keyWord).then(({photos, total}) => {
-      if (photos.length > 0) {
         this.setState (prevState => ({
           page : prevState.page + 1,
-          photos : prevState.photos.concat(photos),
-          total : total,
-        })
-      )} 
-      // else { Notiflix.Notify.success('That is all photos we have found!');}
-    }
-    ).finally(() => 
-      this.setState({
-      loading : false
-    }))
+        }))
   }
 
 
@@ -80,7 +59,7 @@ state = {
     return (
       <>
         <Searchbar 
-          onSubmit={this.onSubmit}
+          changeState = {this.changeState}
           /> 
 
         {this.state.page === 1 && this.state.loading && 
@@ -89,7 +68,7 @@ state = {
           </section>
         }  
           
-        {this.state.photos.length !== 0 && (
+        {this.state.photos.length === 0 && (
           <section className={css.section}>
             <ImageGallery 
               photos = {this.state.photos}
@@ -104,7 +83,6 @@ state = {
         
         <Foooter/>
       </>  
-      
     )
   }
 };

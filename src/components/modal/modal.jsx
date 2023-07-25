@@ -18,13 +18,13 @@ export class Modal extends Component {
     document.body.style.overflow = 'unset';
   }
 
- handleEscape = (e) => {
+  handleEscape = (e) => {
     if (e.code === 'Escape') {
       this.props.onClose();
     }
   }
 
-  handleClick = (e) => {
+   handleClick = (e) => {
     if (e.target === e.currentTarget) {
       this.props.onClose();
     }
