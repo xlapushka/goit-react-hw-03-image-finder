@@ -22,7 +22,7 @@ export function ImageGallery ({photos, keyWord}) {
 
 ImageGallery.propTypes = {
   photos: PropTypes.arrayOf(PropTypes.object).isRequired,
-  keyWord: PropTypes.string.isRequired
+  keyWord: PropTypes.string
 }
 
  

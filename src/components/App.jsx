@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import Notiflix from 'notiflix';
 
 import { Searchbar } from './searchbar/searchbar';
 import { Foooter } from './footer/footer';
