@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { Searchbar } from './searchbar/searchbar';
 import { Foooter } from './footer/footer';
-import { getImages } from './api/api';
+import { getImages } from '../api/api';
 import { ImageGallery } from './imageGallery/imageGallery';
 import { Button } from './button/button';
 import { Loader } from './loader/loader';
@@ -20,45 +20,55 @@ state = {
   loading: false,
 };
 
-componentDidUpdate(prevProps, prevState) {
-    this.setState({
-      loading : true
-    });
 
-      getImages(this.state.page, this.state.keyWord).then(({photos,total}) => {
-          this.setState (prevState => ({
-          // page : prevState.page + 1,  
-          photos : prevState.photos.concat(photos),
-          total : total,
-          }))
-        }).finally(() => 
+componentDidUpdate(prevProps, prevState) {
+    if (this.state.keyWord === "") {
+        return
+      } else { 
+        if (prevState.loading !== this.state.loading) {
           this.setState({
-          loading : false
-        }))
-    }
+            loading : true
+          });
+        }
+
+        getImages(this.state.page, this.state.keyWord).then(({photos,total}) => {
+          if (prevState.page !== this.state.page || prevState.keyWord !== this.state.keyWord) {
+            this.setState (prevState => ({
+              photos : [...prevState.photos, ...photos],
+              total : total,
+            }))
+          }    
+        }).finally(() => {if (prevState.loading !== this.state.loading) {
+            this.setState({
+            loading : false
+            })
+          }})
+      }
+}
       
 
-changeState = (keyWord) => {
+changeKeyWord= (keyWord) =>{
     this.setState({
-      keyWord : keyWord
+      page : 1,
+      keyWord : keyWord,
+      photos: [],
+      total: 0,
     })
 } 
 
-  onClick = (e) => {
+onClick = (e) => {
     e.preventDefault();
-
-        this.setState (prevState => ({
-          page : prevState.page + 1,
-        }))
+    this.setState (prevState => ({
+      page : prevState.page + 1,
+    }))
   }
 
 
   render() {
-
     return (
       <>
         <Searchbar 
-          changeState = {this.changeState}
+          changeKeyWord = {this.changeKeyWord}
           /> 
 
         {this.state.page === 1 && this.state.loading && 
@@ -67,7 +77,7 @@ changeState = (keyWord) => {
           </section>
         }  
           
-        {this.state.photos.length === 0 && (
+        {this.state.photos.length !== 0 && (
           <section className={css.section}>
             <ImageGallery 
               photos = {this.state.photos}

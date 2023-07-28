@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
+
 import { ImageGalleryItem } from '../imageGalleryItem/imageGalleryItem';
+
 import css from '../styles.module.css';
+
 
 export function ImageGallery ({photos, keyWord}) {
   return (
@@ -20,9 +23,10 @@ export function ImageGallery ({photos, keyWord}) {
   )
 }
 
+
 ImageGallery.propTypes = {
   photos: PropTypes.arrayOf(PropTypes.object).isRequired,
-  keyWord: PropTypes.string
+  keyWord: PropTypes.string.isRequired
 }
 
  

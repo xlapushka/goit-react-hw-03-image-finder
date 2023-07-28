@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-// import * as basicLightbox from 'basiclightbox'
-import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
+
+import { createPortal } from 'react-dom';
+
 import css from '../styles.module.css';
+
 
 const modalRoot = document.querySelector('#modal-root');
 
@@ -24,33 +26,27 @@ export class Modal extends Component {
     }
   }
 
-   handleClick = (e) => {
+  handleClick = (e) => {
     if (e.target === e.currentTarget) {
       this.props.onClose();
     }
   }
 
   render() { 
-//     const instance = basicLightbox.create(`
-//     <div class="modal">
-//         <p>
-//             Your first lightbox with just a few lines of code.
-//             Yes, it's really that simple.
-//         </p>
-//     </div>
-// `)
 
     return createPortal(    
       <div className={css.modal} onClick={this.handleClick}>
         <div className={css.modalContent}>{this.props.children}</div>
       </div>,
       modalRoot,
-      )}
+    )
+  }
 } 
+
 
 Modal.propTypes = {
   onClose: PropTypes.func.isRequired,
-  children: PropTypes.element
+  children: PropTypes.element.isRequired
 };
 
 

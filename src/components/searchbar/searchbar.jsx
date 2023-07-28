@@ -3,18 +3,21 @@ import PropTypes from 'prop-types';
 
 import css from '../styles.module.css';
 
+
 export class Searchbar extends Component { 
-    state = {keyWord: ''};
+  state = {
+    keyWord : ''
+  };
   
-    handleChange = (event) => {
-      this.setState({keyWord: event.target.value.trim()});
-    }
+
+  handleChange = (event) => {
+    this.setState({keyWord: event.target.value});
+  }
   
-    handleSubmit(event) {
-      console.log(event.target);
-      // this.props.changeState(event.target.value.trim());
-      event.preventDefault();
-    }
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.props.changeKeyWord(this.state.keyWord.trim());
+  }
 
 
   render() {
@@ -44,6 +47,7 @@ export class Searchbar extends Component {
   }  
 }
 
+
 Searchbar.propTypes = {
-  changeState: PropTypes.func,
+  changeKeyWord: PropTypes.func.isRequired,
 };
